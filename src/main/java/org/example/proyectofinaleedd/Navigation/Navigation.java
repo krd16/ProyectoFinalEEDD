@@ -2,17 +2,20 @@ package org.example.proyectofinaleedd.Navigation;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.example.proyectofinaleedd.Screens.HubScreen;
 import org.example.proyectofinaleedd.Screens.LoginScreen;
 
 public class Navigation {
     public enum SCREENS {
-        LOGIN_SCREEN
+        LOGIN_SCREEN,
+        HUB_SCREEN
     }
     private static final Stage stage = new Stage();
 
     public static void navigate(SCREENS screen) {
         switch (screen) {
             case LOGIN_SCREEN -> setupStage("Login", new Scene(new LoginScreen().getRoot(), 300, 300));
+            case HUB_SCREEN -> setupStage("Hub", new Scene(new HubScreen().getRoot(), 300, 300));
         }
     }
 
