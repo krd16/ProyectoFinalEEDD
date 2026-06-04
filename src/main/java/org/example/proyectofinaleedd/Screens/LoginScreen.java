@@ -14,7 +14,7 @@ public class LoginScreen {
 
     private final Label userLabel = new Label("Usuario: ");
     private final Label passwordLabel = new Label("Contraseña: ");
-    private final Label errorLabel = new Label();
+    private final Label informationLabel = new Label();
 
     private final TextField userFiled = new TextField();
     private final PasswordField passwordField = new PasswordField();
@@ -28,10 +28,10 @@ public class LoginScreen {
         root.setHgap(10);
 
         GridPane.setHalignment(loginButton, HPos.CENTER);
-        GridPane.setHalignment(errorLabel, HPos.CENTER);
+        GridPane.setHalignment(informationLabel, HPos.CENTER);
 
         GridPane.setColumnSpan(loginButton, 2);
-        GridPane.setColumnSpan(errorLabel, 2);
+        GridPane.setColumnSpan(informationLabel, 2);
 
         root.add(userLabel, 0, 0);
         root.add(userFiled, 1, 0);
@@ -41,7 +41,7 @@ public class LoginScreen {
 
         root.add(loginButton, 0, 2);
 
-        root.add(errorLabel, 0, 3);
+        root.add(informationLabel, 0, 3);
 
         loginButton.setOnAction(_ -> {
             Navigation.navigate(Navigation.SCREENS.HUB_SCREEN);

@@ -16,7 +16,7 @@ public class RemoveProductScreen {
 
     private Label productNameLabel = new Label("Nombre del producto: ");
     private Label productAmountLabel = new Label("Cantidad: ");
-    private Label errorLabel = new Label();
+    private Label informationLabel = new Label();
 
     private TextField productName = new TextField();
     private TextField productAmount = new TextField();
@@ -30,10 +30,10 @@ public class RemoveProductScreen {
         root.setAlignment(Pos.CENTER);
 
         GridPane.setHalignment(buttonsHBox, HPos.CENTER);
-        GridPane.setHalignment(errorLabel, HPos.CENTER);
+        GridPane.setHalignment(informationLabel, HPos.CENTER);
 
         GridPane.setColumnSpan(buttonsHBox, 2);
-        GridPane.setColumnSpan(errorLabel, 2);
+        GridPane.setColumnSpan(informationLabel, 2);
 
         buttonsHBox.setAlignment(Pos.CENTER);
         buttonsHBox.setSpacing(20);
@@ -48,7 +48,7 @@ public class RemoveProductScreen {
 
         root.add(buttonsHBox, 0, 2);
 
-        root.add(errorLabel, 0, 3);
+        root.add(informationLabel, 0, 3);
 
         removeButton.setOnAction(_ -> {
             // TODO: Add button logic
