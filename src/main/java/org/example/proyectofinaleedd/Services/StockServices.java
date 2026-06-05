@@ -18,4 +18,12 @@ public class StockServices {
 
         StockRepository.addProduct(product, Integer.parseInt(stock));
     }
+
+    public static void removeProduct(String product, String amount) throws Exception {
+        if (product.isBlank() || amount.isBlank()) {
+            throw new Exception("Todos los campos deben estar llenos.");
+        }
+
+        StockRepository.removeProduct(product, Integer.parseInt(amount));
+    }
 }

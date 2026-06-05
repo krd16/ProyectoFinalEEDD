@@ -51,4 +51,33 @@ public class StockRepository {
             throw new Exception("Error: " + e.getMessage());
         }
     }
+
+    public static void removeProduct(String product, int amount) throws Exception {
+        try (
+                Connection connection = DBConnection.getConnection()
+        ) {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM productos WHERE nombre = ?");
+            statement.setString(1, product);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int stock = resultSet.getInt("stock");
+
+                if (stock >= amount) {
+                    statement = connection.prepareStatement("UPDATE productos SET stock = stock - ? WHERE nombre = ?");
+
+                    statement.setInt(1, amount);
+                    statement.setString(2, product);
+
+                    statement.executeUpdate();
+                } else {
+                    throw new Exception("No hay suficientes existencias de ese producto.");
+                }
+            } else {
+                throw new Exception("Producto no encontrado.");
+            }
+        } catch (Exception e) {
+            throw new Exception("Error: " + e.getMessage());
+        }
+    }
 }

@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import org.example.proyectofinaleedd.Navigation.Navigation;
+import org.example.proyectofinaleedd.Services.StockServices;
 
 public class RemoveProductScreen {
     private final GridPane root = new GridPane();
@@ -51,7 +52,14 @@ public class RemoveProductScreen {
         root.add(informationLabel, 0, 3);
 
         removeButton.setOnAction(_ -> {
-            // TODO: Add button logic
+            try {
+                StockServices.removeProduct(productName.getText(), productAmount.getText());
+                informationLabel.setText("Stock actualizado con éxito");
+            } catch (NumberFormatException e) {
+                informationLabel.setText("El campo cantidad debe se un número válido.");
+            } catch (Exception e) {
+                informationLabel.setText(e.getMessage());
+            }
         });
 
         backButton.setOnAction(_ -> {
