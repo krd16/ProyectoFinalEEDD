@@ -10,4 +10,12 @@ public class StockServices {
 
         return StockRepository.getStock(product);
     }
+
+    public static void addProduct(String product, String stock) throws Exception {
+        if (product.isBlank() || stock.isBlank()) {
+            throw new Exception("Todos los campos deben estar llenos.");
+        }
+
+        StockRepository.addProduct(product, Integer.parseInt(stock));
+    }
 }
