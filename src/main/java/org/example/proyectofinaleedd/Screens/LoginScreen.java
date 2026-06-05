@@ -8,6 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import org.example.proyectofinaleedd.Navigation.Navigation;
+import org.example.proyectofinaleedd.Services.LoginServices;
 
 public class LoginScreen {
     private final GridPane root = new GridPane();
@@ -44,7 +45,12 @@ public class LoginScreen {
         root.add(informationLabel, 0, 3);
 
         loginButton.setOnAction(_ -> {
-            Navigation.navigate(Navigation.SCREENS.HUB_SCREEN);
+            try {
+                LoginServices.login(userFiled.getText(), passwordField.getText());
+                Navigation.navigate(Navigation.SCREENS.HUB_SCREEN);
+            } catch (Exception e) {
+                informationLabel.setText(e.getMessage());
+            }
         });
     }
 

@@ -110,5 +110,15 @@
                 <db.password>T70SzPGRqwVBtPjo</db.password>
             </properties>
         </profile>
+
+        <profile>
+            <id>prod</id>
+
+            <properties>
+                <db.url>jdbc:postgresql://db.dczagdxpvxssvlyittoh.supabase.co:5432/postgres</db.url>
+                <db.username>postgres</db.username>
+                <db.password>Dm6V8bTX6R9mzs7c</db.password>
+            </properties>
+        </profile>
     </profiles>
 </project>
