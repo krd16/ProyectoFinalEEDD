@@ -44,7 +44,7 @@ public class LoginScreen {
 
         root.add(informationLabel, 0, 3);
 
-        loginButton.setOnAction(_ -> {
+        loginButton.setOnAction(actionEvent -> {
             try {
                 LoginServices.login(userFiled.getText(), passwordField.getText());
                 Navigation.navigate(Navigation.SCREENS.HUB_SCREEN);

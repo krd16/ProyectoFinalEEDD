@@ -29,15 +29,15 @@ public class HubScreen {
         root.add(removeProductButton, 0, 1);
         root.add(consultExistencesButton, 0, 2);
 
-        addProductButton.setOnAction(_ -> {
+        addProductButton.setOnAction(actionEvent -> {
             Navigation.navigate(Navigation.SCREENS.ADD_PRODUCT_SCREEN);
         });
 
-        removeProductButton.setOnAction(_ -> {
+        removeProductButton.setOnAction(actionEvent -> {
             Navigation.navigate(Navigation.SCREENS.REMOVE_PRODUCT_SCREEN);
         });
 
-        consultExistencesButton.setOnAction(_ -> {
+        consultExistencesButton.setOnAction(actionEvent -> {
             Navigation.navigate(Navigation.SCREENS.EXISTENCES_SCREEN);
         });
     }

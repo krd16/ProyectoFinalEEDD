@@ -46,7 +46,7 @@ public class ExistencesScreen {
 
         root.add(informationLabel, 0, 2);
 
-        existencesButton.setOnAction(_ -> {
+        existencesButton.setOnAction(actionEvent -> {
             try {
                 informationLabel.setText("Existencias: " + StockServices.getStock(productName.getText()));
             } catch (Exception e) {
@@ -54,7 +54,7 @@ public class ExistencesScreen {
             }
         });
 
-        backButton.setOnAction(_ -> {
+        backButton.setOnAction(actionEvent -> {
             Navigation.navigate(Navigation.SCREENS.HUB_SCREEN);
         });
     }

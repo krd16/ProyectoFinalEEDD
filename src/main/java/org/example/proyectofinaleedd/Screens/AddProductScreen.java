@@ -51,7 +51,7 @@ public class AddProductScreen {
 
         root.add(informationLabel, 0, 3);
 
-        addButton.setOnAction(_ -> {
+        addButton.setOnAction(actionEvent -> {
             try {
                 StockServices.addProduct(productName.getText(), productStock.getText());
                 informationLabel.setText("Producto añadido con éxito.");
@@ -62,7 +62,7 @@ public class AddProductScreen {
             }
         });
 
-        backButton.setOnAction(_ -> {
+        backButton.setOnAction(actionEvent -> {
             Navigation.navigate(Navigation.SCREENS.HUB_SCREEN);
         });
     }

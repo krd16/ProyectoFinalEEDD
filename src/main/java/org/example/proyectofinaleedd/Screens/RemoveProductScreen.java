@@ -51,7 +51,7 @@ public class RemoveProductScreen {
 
         root.add(informationLabel, 0, 3);
 
-        removeButton.setOnAction(_ -> {
+        removeButton.setOnAction(actionEvent -> {
             try {
                 StockServices.removeProduct(productName.getText(), productAmount.getText());
                 informationLabel.setText("Stock actualizado con éxito");
@@ -62,7 +62,7 @@ public class RemoveProductScreen {
             }
         });
 
-        backButton.setOnAction(_ -> {
+        backButton.setOnAction(actionEvent -> {
             Navigation.navigate(Navigation.SCREENS.HUB_SCREEN);
         });
     }
