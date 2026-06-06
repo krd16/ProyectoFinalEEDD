@@ -12,6 +12,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.12.1</junit.version>
+        <!-- ✅ NUEVO: versión de Mockito -->
+        <mockito.version>5.11.0</mockito.version>
     </properties>
 
     <dependencies>
@@ -31,6 +33,7 @@
             <version>21.0.6</version>
         </dependency>
 
+        <!-- JUnit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -41,6 +44,29 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito Core -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-inline</artifactId>
+            <version>5.2.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Integración de Mockito con JUnit 5 -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -62,7 +88,6 @@
                 <version>0.0.8</version>
                 <executions>
                     <execution>
-                        <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>org.example.proyectofinaleedd/org.example.proyectofinaleedd.Application
@@ -86,6 +111,13 @@
                     <mainClass>org.example.proyectofinaleedd.Launcher</mainClass>
                 </configuration>
             </plugin>
+
+            <!-- Necesario para que Maven ejecute los tests de JUnit 5 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+            </plugin>
         </plugins>
 
         <resources>
@@ -99,21 +131,17 @@
     <profiles>
         <profile>
             <id>dev</id>
-
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-
             <properties>
                 <db.url>jdbc:postgresql://db.qthdpzdtjfipztzhwlkm.supabase.co:5432/postgres</db.url>
                 <db.username>postgres</db.username>
                 <db.password>T70SzPGRqwVBtPjo</db.password>
             </properties>
         </profile>
-
         <profile>
             <id>prod</id>
-
             <properties>
                 <db.url>jdbc:postgresql://db.dczagdxpvxssvlyittoh.supabase.co:5432/postgres</db.url>
                 <db.username>postgres</db.username>
