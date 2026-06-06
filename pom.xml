@@ -119,6 +119,7 @@
                 <configuration>
                     <useManifestOnlyJar>false</useManifestOnlyJar>
                     <argLine>
+                        @{argLine}
                         -Djdk.net.URLClassPath.disableClassPathURLCheck=true
                         -Dnet.bytebuddy.experimental=true
                     </argLine>
