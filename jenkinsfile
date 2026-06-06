@@ -1,0 +1,81 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'Maven-3.9'
+        jdk   'JDK-21'
+    }
+
+    environment {
+        APP_NAME  = 'ProyectoFinalEEDD'
+        ARTIFACT  = "target/${APP_NAME}-1.0-SNAPSHOT.jar"
+        JAVA_HOME = '/usr/lib/jvm/java-21-amazon-corretto.x86_64'
+        PATH      = "${JAVA_HOME}/bin:${env.PATH}"
+    }
+
+    stages {
+
+        // ── 1. CHECKOUT ───────────────────────────────────────────────────────
+        stage('Checkout') {
+            steps {
+                echo 'Cloning repository...'
+                git branch: 'master',
+                    url: 'https://github.com/krd16/ProyectoFinalEEDD.git'
+            }
+        }
+
+        // ── 2. BUILD ──────────────────────────────────────────────────────────
+        stage('Build') {
+            steps {
+                echo 'Compiling source code...'
+                sh 'mvn clean compile -DskipTests'
+            }
+        }
+
+        // ── 3. TEST ───────────────────────────────────────────────────────────
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+                failure {
+                    echo 'Tests failed — check the Test Results tab for details.'
+                }
+            }
+        }
+
+        // ── 4. PACKAGE ────────────────────────────────────────────────────────
+        stage('Package') {
+            steps {
+                echo 'Packaging application...'
+                sh 'mvn package -DskipTests'
+            }
+        }
+
+        // ── 5. PUBLISH ────────────────────────────────────────────────────────
+        stage('Publish') {
+            steps {
+                echo 'Publishing artifacts...'
+                archiveArtifacts artifacts: 'target/*.jar',
+                                 fingerprint: true,
+                                 onlyIfSuccessful: true
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline completed successfully. Artifact: ${ARTIFACT}"
+        }
+        failure {
+            echo 'Pipeline failed. Check the logs above for details.'
+        }
+        always {
+            cleanWs()
+        }
+    }
+}
